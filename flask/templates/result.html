@@ -2,32 +2,17 @@
 <html>
 <head>
     <title>Prediction Result</title>
-
-    <style>
-        .back-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px 0;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-<h2>Prediction Result</h2>
-<h3>Custom Model's Prediction</h3>
-<p>{{ prediction }}</p>
-<h3>Modified Resnet Model's Prediction</h3>
-<p>{{ res_prediction }}</p>
-
-<a href="/" class="back-button">Upload Another Image</a>
-
+<div class="result-content">
+    <h2>Prediction Result</h2>
+    <h3>Custom Model's Prediction</h3>
+    <p>{{ prediction }}</p>
+    <h3>Modified Resnet Model's Prediction</h3>
+    <p>{{ res_prediction }}</p>
+    <img src="{{ url_for('static', filename=image_path) }}" alt="MRI Image" class="result-image">
+    <a href="/" class="back-button">Upload Another Image</a>
+</div>
 </body>
 </html>

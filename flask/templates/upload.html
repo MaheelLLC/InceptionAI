@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
+  <div class="content">
+    <h2>Upload MRI Image</h2>
+    <form method="post" enctype="multipart/form-data">
+      <label for="file-upload" class="custom-file-upload" id="dropzone">
+        <i class="fa fa-cloud-upload"></i> Drag your files here or click in this area
+      </label>
+      <input type="file" id="file-upload" name="file" style="display:none;">
+      <span id="file-name"></span>
+      <input type="submit" value="Upload" class="upload-button">
+    </form>
+  </div>
+  <script>
+    let dropzone = document.getElementById('dropzone');
 
-<h2>Upload MRI Image</h2>
-<form method="post" enctype="multipart/form-data">
-  <input type="file" name="file">
-  <input type="submit" value="Upload">
-</form>
+    dropzone.ondragover = function() {
+        this.className = 'custom-file-upload dragover';
+        return false;
+    }
 
+    dropzone.ondragleave = function() {
+        this.className = 'custom-file-upload';
+        return false;
+    }
+
+    dropzone.ondrop = function(e) {
+        e.preventDefault();
+        this.className = 'custom-file-upload';
+        document.getElementById('file-upload').files = e.dataTransfer.files;
+        let fileName = document.getElementById('file-upload').files[0].name;
+        document.querySelector('#dropzone').textContent = 'File selected: ' + fileName;
+    }
+  </script>
 </body>
 </html>

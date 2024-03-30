@@ -51,17 +51,17 @@ def resize_and_pad(img, size=(512,512), pad_color=0):
                                     value = pad_color)
     return scaled_img
 
+if __name__ == "__main__":
+    # Directory containing images
+    input_dir = "../google_image/image"
+    output_dir = "../google_image"
 
-# Directory containing images
-input_dir = "/home/maheel/Documents/Python/Route_2/New_Tumor/Testing/notumor"
-output_dir = "/home/maheel/Documents/Python/Route_2/New_Tumor/Testing/asp_notumor"
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-
-# Process each image
-for filename in os.listdir(input_dir):
-    if filename.endswith(".jpg"):
-        img = cv2.imread(os.path.join(input_dir, filename))
-        resized_img = resize_and_pad(img)
-        cv2.imwrite(os.path.join(output_dir, filename), resized_img)
+    # Process each image
+    for filename in os.listdir(input_dir):
+        if filename.endswith(".jpg"):
+            img = cv2.imread(os.path.join(input_dir, filename))
+            resized_img = resize_and_pad(img)
+            cv2.imwrite(os.path.join(output_dir, filename), resized_img)
