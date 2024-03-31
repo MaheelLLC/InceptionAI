@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from torchvision import transforms, models
 from aspect_ratio import resize_and_pad
 from werkzeug.utils import secure_filename
@@ -90,6 +90,12 @@ def upload_file():
                 return "Invalid image file"
     return render_template('upload.html')
 
+@app.route('/delete', methods=['POST'])
+def delete_image():
+    data = request.get_json()
+    image_path = data.get('image_path')
+    os.remove(os.path.join('static', image_path))
+    return jsonify({'result': 'success'})
 
 def predict(image):
     with torch.no_grad():
